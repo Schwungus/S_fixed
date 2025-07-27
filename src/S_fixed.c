@@ -1,5 +1,11 @@
 #include "S_fixed.h"
 
+fix16_t fix_div(fix16_t a, fix16_t b) {
+    if (b == FIX_ZERO)
+        return FIX_ZERO;
+    return (fix16_t)(((fix32_t)(a) << FIX_FBITS) / (fix32_t)(b));
+}
+
 fix16_t fix_ceil(fix16_t x) {
     return fix_frac(x) ? fix_add(fix_floor(x), FIX_ONE) : x;
 }
@@ -29,10 +35,11 @@ fix16_t fix_sqr(fix16_t x) {
 }
 
 fix16_t fix_sqrt(fix16_t x) {
-    // https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_sqrt.c
-    uint8_t neg = x < FIX_ZERO;
-    uint32_t num = fix_abs(x);
+    if (x <= FIX_ZERO)
+        return FIX_ZERO;
 
+    // https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_sqrt.c
+    uint32_t num = (uint32_t)x;
     uint32_t bit = (num & 0xFFF00000) ? (uint32_t)(1 << 30) : (uint32_t)(1 << 18);
     while (bit > num)
         bit >>= 2;
@@ -63,7 +70,7 @@ fix16_t fix_sqrt(fix16_t x) {
 
     if (num > out)
         out++;
-    return neg ? -(fix16_t)out : (fix16_t)out;
+    return (fix16_t)out;
 }
 
 fix16_t fix_sin(fix16_t x) {
