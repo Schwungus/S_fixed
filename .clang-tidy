@@ -8,5 +8,4 @@ Checks: |
   -misc-unused-parameters,
   performance-*,
   -performance-no-int-to-ptr,
-  portability-*,
-  altera-struct-pack-align
+  portability-*
