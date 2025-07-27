@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.27.0 FATAL_ERROR)
+
+project(
+    S_fixed
+    VERSION 0.1.0
+    LANGUAGES C)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+
+# Build
+set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
+file(GLOB_RECURSE SOURCES ${SOURCE_DIR}/*.c)
+file(GLOB_RECURSE HEADERS ${SOURCE_DIR}/*.h)
+
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_include_directories(${PROJECT_NAME} PRIVATE ${SOURCE_DIR})
