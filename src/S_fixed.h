@@ -3,22 +3,22 @@
 #include <stdint.h>
 
 #define FIX_FBITS 16
-#define FIX_WMASK (fix16_t)(0xFFFF0000)
-#define FIX_FMASK (fix16_t)(0x0000FFFF)
+#define FIX_WMASK ((fix16_t)(0xFFFF0000))
+#define FIX_FMASK ((fix16_t)(0x0000FFFF))
 
 typedef int32_t fix16_t;
 typedef int64_t fix32_t;
 
-#define FIX_ONE (fix16_t)(0x00010000)
-#define FIX_HALF (fix16_t)(0x00008000)
-#define FIX_ZERO (fix16_t)(0)
+#define FIX_ONE ((fix16_t)(0x00010000))
+#define FIX_HALF ((fix16_t)(0x00008000))
+#define FIX_ZERO ((fix16_t)(0))
 
 #define fix_from_int(x) (fix16_t)((x) * FIX_ONE)
 #define fix_from_float(x) (fix16_t)((x) * (float)FIX_ONE)   /* ! Unsafe ! */
 #define fix_from_double(x) (fix16_t)((x) * (double)FIX_ONE) /* ! Unsafe ! */
-#define fix_to_int(x) (int)((fix16_t)(x) / FIX_ONE)
-#define fix_to_float(x) (float)((float)(x) / (float)(FIX_ONE))     /* ! Unsafe ! */
-#define fix_to_double(x) (double)((double)(x) / (double)(FIX_ONE)) /* ! Unsafe ! */
+#define fix_to_int(x) ((int)((fix16_t)(x) / FIX_ONE))
+#define fix_to_float(x) ((float)((float)(x) / (float)(FIX_ONE)))     /* ! Unsafe ! */
+#define fix_to_double(x) ((double)((double)(x) / (double)(FIX_ONE))) /* ! Unsafe ! */
 
 #define fix_add(a, b) ((fix16_t)(a) + (fix16_t)(b))
 #define fix_sub(a, b) ((fix16_t)(a) - (fix16_t)(b))
@@ -95,7 +95,7 @@ fix16_t fix_lerp(fix16_t a, fix16_t b, fix16_t x)
     ;
 #endif
 
-#define FIX_PI (fix16_t)(0x0003243F)
+#define FIX_PI ((fix16_t)(0x0003243F))
 #define FIX_QUARTER_PI (FIX_PI >> 2)
 #define FIX_HALF_PI (FIX_PI >> 1)
 #define FIX_DOUBLE_PI (FIX_PI << 1)
@@ -182,9 +182,9 @@ fix16_t fix_sin(fix16_t x)
     ;
 #endif
 
-#define fix_cos(x) fix_sin(fix_add(x, FIX_HALF_PI))
-#define fix_acos(x) fix_sub(FIX_HALF_PI, fix_asin(x))
-#define fix_atan(x) fix_atan2(x, FIX_ONE)
+#define fix_cos(x) (fix_sin(fix_add(x, FIX_HALF_PI)))
+#define fix_acos(x) (fix_sub(FIX_HALF_PI, fix_asin(x)))
+#define fix_atan(x) (fix_atan2(x, FIX_ONE))
 
 fix16_t fix_tan(fix16_t x)
 #ifdef FIX_IMPLEMENTATION
