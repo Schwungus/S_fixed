@@ -11,7 +11,7 @@ In your `main.c` file, compile this library's function definitions by writing:
 #include "S_fixed.h"
 
 int main(int argc, char* argv[]) {
-    /// your code goes here...
+    // your code goes here...
 }
 ```
 
@@ -23,7 +23,7 @@ Everywhere else, include the header normally to add the library's functions and 
 #include "S_fixed.h"
 
 int my_epic_function();
-/// and so on...
+// and so on...
 ```
 
 This is pretty much how every "header-only" library works.
