@@ -13,16 +13,16 @@ typedef int64_t fix32_t;
 #define FIX_HALF ((fix16_t)(0x00008000))
 #define FIX_ZERO ((fix16_t)(0))
 
-#define fix_from_int(x) (fix16_t)((x) * FIX_ONE)
-#define fix_from_float(x) (fix16_t)((x) * (float)FIX_ONE)   /* ! Unsafe ! */
-#define fix_from_double(x) (fix16_t)((x) * (double)FIX_ONE) /* ! Unsafe ! */
+#define fix_from_int(x) ((fix16_t)((x) * FIX_ONE))
+#define fix_from_float(x) ((fix16_t)((x) * (float)FIX_ONE))   /* ! Unsafe ! */
+#define fix_from_double(x) ((fix16_t)((x) * (double)FIX_ONE)) /* ! Unsafe ! */
 #define fix_to_int(x) ((int)((fix16_t)(x) / FIX_ONE))
 #define fix_to_float(x) ((float)((float)(x) / (float)(FIX_ONE)))     /* ! Unsafe ! */
 #define fix_to_double(x) ((double)((double)(x) / (double)(FIX_ONE))) /* ! Unsafe ! */
 
-#define fix_add(a, b) ((fix16_t)(a) + (fix16_t)(b))
-#define fix_sub(a, b) ((fix16_t)(a) - (fix16_t)(b))
-#define fix_mul(a, b) (fix16_t)(((fix32_t)(a) * (fix32_t)(b)) >> FIX_FBITS)
+#define fix_add(a, b) (((fix16_t)(a)) + ((fix16_t)(b)))
+#define fix_sub(a, b) (((fix16_t)(a)) - ((fix16_t)(b)))
+#define fix_mul(a, b) ((fix16_t)((((fix32_t)(a)) * ((fix32_t)(b))) >> FIX_FBITS))
 
 fix16_t fix_div(fix16_t a, fix16_t b)
 #ifdef FIX_IMPLEMENTATION
@@ -35,11 +35,11 @@ fix16_t fix_div(fix16_t a, fix16_t b)
     ;
 #endif
 
-#define fix_half(a) ((fix16_t)(a) >> 1)
-#define fix_double(a) ((fix16_t)(a) << 1)
+#define fix_half(a) (((fix16_t)(a)) >> 1)
+#define fix_double(a) (((fix16_t)(a)) << 1)
 
-#define fix_frac(x) ((fix16_t)(x) & FIX_FMASK)
-#define fix_floor(x) ((fix16_t)(x) & FIX_WMASK)
+#define fix_frac(x) (((fix16_t)(x)) & FIX_FMASK)
+#define fix_floor(x) (((fix16_t)(x)) & FIX_WMASK)
 
 fix16_t fix_ceil(fix16_t x)
 #ifdef FIX_IMPLEMENTATION
