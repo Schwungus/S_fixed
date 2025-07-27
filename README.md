@@ -1,14 +1,38 @@
 # S_fixed
 
-16.16 fixed point math library for C.
+Header-only 16.16 fixed-point math library for C.
+
+## Usage
+
+In your `main.c` file, compile this library's function definitions by writing:
+
+```c
+#define FIX_IMPLEMENTATION
+#include "S_fixed.h"
+
+int main(int argc, char* argv[]) {
+    /// your code goes here...
+}
+```
+
+Everywhere else, include the header normally to add the library's functions and constants to scope:
+
+```c
+#pragma once
+
+#include "S_fixed.h"
+
+int my_epic_function();
+/// and so on...
+```
+
+This is pretty much how every "header-only" library works.
 
 ## Notes
 
-The type you should primarily use with this library is `fixed16_t`.
-`fixed32_t` is only used internally for multiplication and division.
+The type you should primarily use with this library is `fixed16_t`. `fixed32_t` is only used internally for multiplication and division.
 
-The trigonometry functions were based on libfixmath's implementations and
-simplified for this library.
+The trigonometry functions were based on libfixmath's implementations and simplified for this library.
 
 ## Functions
 

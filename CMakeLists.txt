@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.27.0 FATAL_ERROR)
 project(
     S_fixed
     VERSION 0.1.0
+    DESCRIPTION "Header-only 16.16 fixed-point math library for C"
     LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
