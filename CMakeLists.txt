@@ -9,10 +9,10 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-# Build
-set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
-file(GLOB_RECURSE SOURCES ${SOURCE_DIR}/*.c)
-file(GLOB_RECURSE HEADERS ${SOURCE_DIR}/*.h)
+set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+add_library(${PROJECT_NAME} INTERFACE ${SOURCE_DIR}/S_fixed.h)
+target_include_directories(${PROJECT_NAME} INTERFACE ${SOURCE_DIR})
 
-add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_include_directories(${PROJECT_NAME} PRIVATE ${SOURCE_DIR})
+set(TEST_NAME ${PROJECT_NAME}Test)
+add_executable(${TEST_NAME} ${SOURCE_DIR}/S_fixedTests.c)
+target_link_libraries(${TEST_NAME} PRIVATE ${PROJECT_NAME})
