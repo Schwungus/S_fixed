@@ -1,6 +1,6 @@
 # S_fixed
 
-Header-only 16.16 fixed-point math library for C.
+A header-only 16.16 fixed-point math library for C.
 
 ## Usage
 
@@ -30,7 +30,7 @@ This is pretty much how every "header-only" library works.
 
 ## Notes
 
-The type you should primarily use with this library is `fixed16_t`. `fixed32_t` is only used internally for multiplication and division.
+The type you should primarily use with this library is `fix16_t`. `fix32_t` is only used internally for multiplication and division.
 
 The trigonometry functions were based on libfixmath's implementations and simplified for this library.
 
