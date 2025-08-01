@@ -60,6 +60,8 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 | `Fmax(a, b)`      | Maximum of `a` and `b`                      |
 | `Fclamp(x, a, b)` | Clamp `x` between `a` and `b`               |
 | `Flerp(a, b, x)`  | Linear interpolation[^1]                    |
+| `Fdeg(x)`         | Radians to degrees[^1]                      |
+| `Frad(x)`         | Degrees to radians[^1]                      |
 | `Fsqr(x)`         | Square[^1]                                  |
 | `Fsqrt(x)`        | Square root[^2]                             |
 | `Fsin(x)`         | Sine                                        |

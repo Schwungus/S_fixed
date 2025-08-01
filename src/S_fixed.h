@@ -101,6 +101,9 @@ fix16_t Flerp(fix16_t a, fix16_t b, fix16_t x)
 #define Fx2Pi (FxPi << 1)
 #define Fx3PiD4 ((Fx2Pi + FxPi) >> 2)
 
+#define Fdeg(x) Fmul(x, 0x00394BB8)
+#define Frad(x) Fmul(x, 0x00000478)
+
 fix16_t Fsqr(fix16_t x)
 #ifdef FIX_IMPLEMENTATION
 {
