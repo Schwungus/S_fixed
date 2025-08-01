@@ -38,37 +38,37 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 
 ### Basic
 
-| Function             | Description                                 |
-| -------------------- | ------------------------------------------- |
-| `fix_from_int(x)`    | Integer to fixed point                      |
-| `fix_from_float(x)`  | Float to fixed point[^3]                    |
-| `fix_from_double(x)` | Double to fixed point[^3]                   |
-| `fix_to_int(x)`      | Fixed point to integer                      |
-| `fix_to_float(x)`    | Fixed point to float                        |
-| `fix_to_double(x)`   | Fixed point to double                       |
-| `fix_add(a, b)`      | Add `+`[^1]                                 |
-| `fix_sub(a, b)`      | Subtract `-`[^1]                            |
-| `fix_mul(a, b)`      | Multiply `*`[^1]                            |
-| `fix_div(a, b)`      | Divide `/`[^1][^2]                          |
-| `fix_half(x)`        | Halve `x / 2`[^1]                           |
-| `fix_double(x)`      | Double `x * 2`[^1]                          |
-| `fix_frac(x)`        | Fractional part                             |
-| `fix_floor(x)`       | Round down                                  |
-| `fix_ceil(x)`        | Round up[^1]                                |
-| `fix_abs(x)`         | Absolute value                              |
-| `fix_min(a, b)`      | Minimum of `a` and `b`                      |
-| `fix_max(a, b)`      | Maximum of `a` and `b`                      |
-| `fix_clamp(x, a, b)` | Clamp `x` between `a` and `b`               |
-| `fix_lerp(a, b, x)`  | Linear interpolation[^1]                    |
-| `fix_sqr(x)`         | Square[^1]                                  |
-| `fix_sqrt(x)`        | Square root[^2]                             |
-| `fix_sin(x)`         | Sine                                        |
-| `fix_cos(x)`         | Cosine                                      |
-| `fix_tan(x)`         | Tangent[^1][^2]                             |
-| `fix_asin(x)`        | Arcsine[^2]                                 |
-| `fix_acos(x)`        | Arccosine[^2]                               |
-| `fix_atan(x)`        | Arctangent[^1][^2]                          |
-| `fix_atan2(y, x)`    | Arctangent of `y / x` with benefits[^1][^2] |
+| Function          | Description                                 |
+| ----------------- | ------------------------------------------- |
+| `FfInt(x)`        | Integer to fixed point                      |
+| `FfFloat(x)`      | Float to fixed point[^3]                    |
+| `FfDouble(x)`     | Double to fixed point[^3]                   |
+| `FtInt(x)`        | Fixed point to integer                      |
+| `FtFloat(x)`      | Fixed point to float                        |
+| `FtDouble(x)`     | Fixed point to double                       |
+| `Fadd(a, b)`      | Add `+`[^1]                                 |
+| `Fsub(a, b)`      | Subtract `-`[^1]                            |
+| `Fmul(a, b)`      | Multiply `*`[^1]                            |
+| `Fdiv(a, b)`      | Divide `/`[^1][^2]                          |
+| `Fhalf(x)`        | Halve `x / 2`[^1]                           |
+| `Fdouble(x)`      | Double `x * 2`[^1]                          |
+| `Ffrac(x)`        | Fractional part                             |
+| `Ffloor(x)`       | Round down                                  |
+| `Fceil(x)`        | Round up[^1]                                |
+| `Fabs(x)`         | Absolute value                              |
+| `Fmin(a, b)`      | Minimum of `a` and `b`                      |
+| `Fmax(a, b)`      | Maximum of `a` and `b`                      |
+| `Fclamp(x, a, b)` | Clamp `x` between `a` and `b`               |
+| `Flerp(a, b, x)`  | Linear interpolation[^1]                    |
+| `Fsqr(x)`         | Square[^1]                                  |
+| `Fsqrt(x)`        | Square root[^2]                             |
+| `Fsin(x)`         | Sine                                        |
+| `Fcos(x)`         | Cosine                                      |
+| `Ftan(x)`         | Tangent[^1][^2]                             |
+| `Fasin(x)`        | Arcsine[^2]                                 |
+| `Facos(x)`        | Arccosine[^2]                               |
+| `Fatan(x)`        | Arctangent[^1][^2]                          |
+| `Fatan2(y, x)`    | Arctangent of `y / x` with benefits[^1][^2] |
 
 [^1]: Overflow is possible.
 [^2]: Returns `0` on failure.
@@ -76,13 +76,13 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 
 ## Constants
 
-| Constant           | Description                                                |
-| ------------------ | ---------------------------------------------------------- |
-| `FIX_ONE`          | Fixed point representation of `1`                          |
-| `FIX_HALF`         | Fixed point representation of `0.5`                        |
-| `FIX_ZERO`         | Fixed point representation of `0`                          |
-| `FIX_PI`           | Fixed point representation of `pi` (16 decimals)           |
-| `FIX_QUARTER_PI`   | Fixed point representation of `pi / 4` (16 decimals)       |
-| `FIX_HALF_PI`      | Fixed point representation of `pi / 2` (16 decimals)       |
-| `FIX_DOUBLE_PI`    | Fixed point representation of `2 * pi` (16 decimals)       |
-| `FIX_QUARTER_3_PI` | Fixed point representation of `(3 * pi) / 4` (16 decimals) |
+| Constant  | Description                                                |
+| --------- | ---------------------------------------------------------- |
+| `FxOne`   | Fixed point representation of `1`                          |
+| `FxHalf`  | Fixed point representation of `0.5`                        |
+| `FxZero`  | Fixed point representation of `0`                          |
+| `FxPi`    | Fixed point representation of `pi` (16 decimals)           |
+| `FxPiD4`  | Fixed point representation of `pi / 4` (16 decimals)       |
+| `FxPiD2`  | Fixed point representation of `pi / 2` (16 decimals)       |
+| `Fx2Pi`   | Fixed point representation of `2 * pi` (16 decimals)       |
+| `Fx3PiD4` | Fixed point representation of `(3 * pi) / 4` (16 decimals) |

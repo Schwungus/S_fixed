@@ -12,7 +12,7 @@ static int testsCounter = 0;
 #define AssertEq(num, expr)                                                                                            \
 	do {                                                                                                           \
 		printf("Test #%d: ", testsCounter);                                                                    \
-		double res = fix_to_double((expr));                                                                    \
+		double res = FtDouble((expr));                                                                         \
 		if (fabs(res - (num)) > Epsilon) {                                                                     \
 			printf("FAIL\n\n\"%s\" is %lf != %f\n", #expr, res, (num));                                    \
 			fflush(stdout);                                                                                \
@@ -26,34 +26,34 @@ static int testsCounter = 0;
 #define DegToRad (Pi / 180.0)
 
 int main(int argc, char* argv[]) {
-	AssertEq(0.0, FIX_ZERO);
-	AssertEq(0.5, FIX_HALF);
-	AssertEq(1.0, FIX_ONE);
+	AssertEq(0.0, FxZero);
+	AssertEq(0.5, FxHalf);
+	AssertEq(1.0, FxOne);
 
-	AssertEq(90.0 * DegToRad, FIX_HALF_PI);
-	AssertEq(180.0 * DegToRad, FIX_PI);
-	AssertEq(360 * DegToRad, FIX_DOUBLE_PI);
+	AssertEq(90.0 * DegToRad, FxPiD2);
+	AssertEq(180.0 * DegToRad, FxPi);
+	AssertEq(360 * DegToRad, Fx2Pi);
 
-	AssertEq(13.0, fix_add(fix_from_int(4L), fix_from_int(9L)));
-	AssertEq(-3.0, fix_sub(fix_from_int(5L), fix_from_int(8L)));
-	AssertEq(42.0, fix_mul(fix_from_int(6L), fix_from_int(7L)));
-	AssertEq(7.0 / 6.0, fix_div(fix_from_int(7L), fix_from_int(6L)));
+	AssertEq(13.0, Fadd(FfInt(4L), FfInt(9L)));
+	AssertEq(-3.0, Fsub(FfInt(5L), FfInt(8L)));
+	AssertEq(42.0, Fmul(FfInt(6L), FfInt(7L)));
+	AssertEq(7.0 / 6.0, Fdiv(FfInt(7L), FfInt(6L)));
 
-	AssertEq(4.5, fix_half(fix_from_int(9L)));
-	AssertEq(18.0, fix_double(fix_from_int(9L)));
+	AssertEq(4.5, Fhalf(FfInt(9L)));
+	AssertEq(18.0, Fdouble(FfInt(9L)));
 
-	AssertEq(0.0509, fix_frac(fix_from_double(127.0509)));
-	AssertEq(127.0, fix_floor(fix_from_double(127.0509)));
-	AssertEq(128.0, fix_ceil(fix_from_double(127.0509)));
+	AssertEq(0.0509, Ffrac(FfDouble(127.0509)));
+	AssertEq(127.0, Ffloor(FfDouble(127.0509)));
+	AssertEq(128.0, Fceil(FfDouble(127.0509)));
 
-	AssertEq(123.123, fix_abs(fix_from_double(-123.123)));
-	AssertEq(81.0, fix_sqr(fix_from_int(9L)));
-	AssertEq(9.0, fix_sqrt(fix_from_int(81L)));
+	AssertEq(123.123, Fabs(FfDouble(-123.123)));
+	AssertEq(81.0, Fsqr(FfInt(9L)));
+	AssertEq(9.0, Fsqrt(FfInt(81L)));
 
-	AssertEq(1.0, fix_tan(FIX_QUARTER_PI));
-	AssertEq(45.0 * DegToRad, fix_asin(fix_sin(FIX_QUARTER_PI)));
-	AssertEq(45.0 * DegToRad, fix_acos(fix_cos(FIX_QUARTER_PI)));
-	AssertEq(45.0 * DegToRad, fix_atan(fix_tan(FIX_QUARTER_PI)));
+	AssertEq(1.0, Ftan(FxPiD4));
+	AssertEq(45.0 * DegToRad, Fasin(Fsin(FxPiD4)));
+	AssertEq(45.0 * DegToRad, Facos(Fcos(FxPiD4)));
+	AssertEq(45.0 * DegToRad, Fatan(Ftan(FxPiD4)));
 
 	printf("\nAll good!!!\n");
 	fflush(stdout);
