@@ -13,9 +13,9 @@ typedef int64_t fix32_t;
 #define FxHalf ((fix16_t)(0x00008000))
 #define FxZero ((fix16_t)(0))
 
-#define FfInt(x) ((fix16_t)((x) * FxOne))
-#define FfFloat(x) ((fix16_t)((x) * (float)FxOne))   /* ! Unsafe ! */
-#define FfDouble(x) ((fix16_t)((x) * (double)FxOne)) /* ! Unsafe ! */
+#define FfInt(x) ((fix16_t)((int)(x) * FxOne))
+#define FfFloat(x) ((fix16_t)((float)(x) * (float)FxOne))    /* ! Unsafe ! */
+#define FfDouble(x) ((fix16_t)((double)(x) * (double)FxOne)) /* ! Unsafe ! */
 #define FtInt(x) ((int)((fix16_t)(x) / FxOne))
 #define FtFloat(x) ((float)((float)(x) / (float)(FxOne)))     /* ! Unsafe ! */
 #define FtDouble(x) ((double)((double)(x) / (double)(FxOne))) /* ! Unsafe ! */
