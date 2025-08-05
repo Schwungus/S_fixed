@@ -50,6 +50,7 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 | `Fsub(a, b)`      | Subtract `-`[^1]                            |
 | `Fmul(a, b)`      | Multiply `*`[^1]                            |
 | `Fdiv(a, b)`      | Divide `/`[^1][^2]                          |
+| `Fmod(a, b)`      | Modulo `%`[^2]                              |
 | `Fhalf(x)`        | Halve `x / 2`[^1]                           |
 | `Fdouble(x)`      | Double `x * 2`[^1]                          |
 | `Ffrac(x)`        | Fractional part                             |
@@ -74,7 +75,7 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 
 [^1]: Overflow is possible.
 [^2]: Returns `0` on failure.
-[^3]: You should probably use this with common sense. Floats and fixed point don't go well together.
+[^3]: You should probably use this with common sense. Floats and fixed point don't go well together.<br>For paranoid people, it's more reliable to generate constant fixed point numbers from floats by typing `x * 65536` in a calculator and storing a truncated version of the result with a `fix16_t` cast.
 
 ## Constants
 

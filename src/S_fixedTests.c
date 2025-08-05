@@ -18,7 +18,7 @@ static int testsCounter = 0;
 			fflush(stdout);                                                                                \
 			return EXIT_FAILURE;                                                                           \
 		}                                                                                                      \
-		printf("SUCCESS\n");                                                                                   \
+		printf("SUCCESS (%.4lf ~== %.4f)\n", res, (num));                                                      \
 		testsCounter++;                                                                                        \
 	} while (0)
 
@@ -32,12 +32,13 @@ int main(int argc, char* argv[]) {
 
 	AssertEq(90.0 * DegToRad, FxPiD2);
 	AssertEq(180.0 * DegToRad, FxPi);
-	AssertEq(360 * DegToRad, Fx2Pi);
+	AssertEq(360.0 * DegToRad, Fx2Pi);
 
 	AssertEq(13.0, Fadd(FfInt(4L), FfInt(9L)));
 	AssertEq(-3.0, Fsub(FfInt(5L), FfInt(8L)));
 	AssertEq(42.0, Fmul(FfInt(6L), FfInt(7L)));
 	AssertEq(7.0 / 6.0, Fdiv(FfInt(7L), FfInt(6L)));
+	AssertEq(1.5, Fmod(FfDouble(7.5), FfInt(6L)));
 
 	AssertEq(4.5, Fhalf(FfInt(9L)));
 	AssertEq(18.0, Fdouble(FfInt(9L)));

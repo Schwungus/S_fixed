@@ -35,6 +35,17 @@ fix16_t Fdiv(fix16_t a, fix16_t b)
     ;
 #endif
 
+fix16_t Fmod(fix16_t a, fix16_t b)
+#ifdef FIX_IMPLEMENTATION
+{
+	if (b == FxZero)
+		return FxZero;
+	return (fix16_t)(a % b);
+}
+#else
+    ;
+#endif
+
 #define Fhalf(a) (((fix16_t)(a)) >> 1)
 #define Fdouble(a) (((fix16_t)(a)) << 1)
 
