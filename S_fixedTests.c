@@ -2,12 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef FIX_IMPLEMENTATION // hide clangd warnings about macro redefinition because of how the linting is configured
 #define FIX_IMPLEMENTATION
+#endif
+
 #include "S_fixed.h"
 
 static int testsCounter = 0;
 
-// Check 4 decimal places max as trigonometry isn't spot-on in fixed point
+// Check 4 decimal places max as trigonometry isn't spot-on in fixed point.
 #define Epsilon (1e-4)
 #define AssertEq(num, expr)                                                                                            \
 	do {                                                                                                           \

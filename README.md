@@ -50,7 +50,7 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 | `Fsub(a, b)`      | Subtract `-`[^1]                            |
 | `Fmul(a, b)`      | Multiply `*`[^1]                            |
 | `Fdiv(a, b)`      | Divide `/`[^1][^2]                          |
-| `Fmod(a, b)`      | Modulo `%`[^2]                              |
+| `Fmod(a, b)`      | Remainder (modulo) `%`[^2]                  |
 | `Fhalf(x)`        | Halve `x / 2`[^1]                           |
 | `Fdouble(x)`      | Double `x * 2`[^1]                          |
 | `Ffrac(x)`        | Fractional part                             |
