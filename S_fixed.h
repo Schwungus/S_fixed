@@ -32,7 +32,7 @@ fix16_t Fdiv(fix16_t a, fix16_t b)
 	return (fix16_t)(((fix32_t)(a) << FxFBits) / (fix32_t)(b));
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fmod(fix16_t a, fix16_t b)
@@ -43,7 +43,7 @@ fix16_t Fmod(fix16_t a, fix16_t b)
 	return (fix16_t)(a % b);
 }
 #else
-    ;
+	;
 #endif
 
 #define Fhalf(a) (((fix16_t)(a)) >> 1)
@@ -58,7 +58,7 @@ fix16_t Fceil(fix16_t x)
 	return Ffrac(x) ? Fadd(Ffloor(x), FxOne) : x;
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fabs(fix16_t x)
@@ -67,7 +67,7 @@ fix16_t Fabs(fix16_t x)
 	return (x < FxZero) ? -x : x;
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fmin(fix16_t a, fix16_t b)
@@ -76,7 +76,7 @@ fix16_t Fmin(fix16_t a, fix16_t b)
 	return (a < b) ? a : b;
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fmax(fix16_t a, fix16_t b)
@@ -85,7 +85,7 @@ fix16_t Fmax(fix16_t a, fix16_t b)
 	return (a > b) ? a : b;
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fclamp(fix16_t x, fix16_t a, fix16_t b)
@@ -94,7 +94,7 @@ fix16_t Fclamp(fix16_t x, fix16_t a, fix16_t b)
 	return (x < a) ? a : ((x > b) ? b : x);
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Flerp(fix16_t a, fix16_t b, fix16_t x)
@@ -103,7 +103,7 @@ fix16_t Flerp(fix16_t a, fix16_t b, fix16_t x)
 	return Fadd(a, Fmul(Fsub(b, a), x));
 }
 #else
-    ;
+	;
 #endif
 
 #define FxPi ((fix16_t)(0x0003243F))
@@ -121,7 +121,7 @@ fix16_t Fsqr(fix16_t x)
 	return Fmul(x, x);
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fsqrt(fix16_t x)
@@ -165,7 +165,7 @@ fix16_t Fsqrt(fix16_t x)
 	return (fix16_t)out;
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fsin(fix16_t x)
@@ -193,7 +193,7 @@ fix16_t Fsin(fix16_t x)
 	return out;
 }
 #else
-    ;
+	;
 #endif
 
 #define Fcos(x) (Fsin(Fadd(x, FxPiD2)))
@@ -206,7 +206,7 @@ fix16_t Ftan(fix16_t x)
 	return Fdiv(Fsin(x), Fcos(x));
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fatan2(fix16_t y, fix16_t x)
@@ -230,7 +230,7 @@ fix16_t Fatan2(fix16_t y, fix16_t x)
 	return (y < 0) ? -angle : angle;
 }
 #else
-    ;
+	;
 #endif
 
 fix16_t Fasin(fix16_t x)
@@ -244,5 +244,5 @@ fix16_t Fasin(fix16_t x)
 	return out;
 }
 #else
-    ;
+	;
 #endif

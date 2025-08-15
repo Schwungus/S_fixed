@@ -1,7 +1,10 @@
 ColumnLimit: 120
 IndentWidth: 8
+ContinuationIndentWidth: 8
 UseTab: Always
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterControlStatement: MultiLine
 DerivePointerAlignment: false
 PointerAlignment: Left
 AllowShortBlocksOnASingleLine: Empty
@@ -12,5 +15,5 @@ AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterReturnType: None
 IndentCaseLabels: true
-AlignAfterOpenBracket: BlockIndent
+AlignAfterOpenBracket: DontAlign
 SortIncludes: CaseSensitive
