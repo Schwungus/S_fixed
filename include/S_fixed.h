@@ -14,28 +14,34 @@ typedef int64_t fix32_t;
 #define FxZero ((fix16_t)(0))
 
 #define Int2Fx(x) ((fix16_t)((int32_t)(x) * FxOne))
-#define Float2Fx(x) ((fix16_t)((float)(x) * (float)FxOne))    /* ! Unsafe ! */
-#define Double2Fx(x) ((fix16_t)((double)(x) * (double)FxOne)) /* ! Unsafe ! */
+#define Float2Fx(x) ((fix16_t)((float)(x) * (float)FxOne))    // ! Unsafe !
+#define Double2Fx(x) ((fix16_t)((double)(x) * (double)FxOne)) // ! Unsafe !
 #define Fx2Int(x) ((int32_t)((fix16_t)(x) / FxOne))
-#define Fx2Float(x) ((float)((float)(x) / (float)(FxOne)))     /* ! Unsafe ! */
-#define Fx2Double(x) ((double)((double)(x) / (double)(FxOne))) /* ! Unsafe ! */
+#define Fx2Float(x) ((float)((float)(x) / (float)(FxOne)))     // ! Unsafe !
+#define Fx2Double(x) ((double)((double)(x) / (double)(FxOne))) // ! Unsafe !
 
 // Use C11 `_Generic` tricks, if available:
 #if __STDC_VERSION__ >= 201112L
 
 #ifdef FIX_IMPLEMENTATION
-#define FIX_MAKE_INLINE_FROM(name, type, conversion)                                                                   \
-	inline fix16_t name(const type x) {                                                                            \
-		return conversion(x);                                                                                  \
+#define FIX_MAKE_INLINE_FROM(name, type, conversion)                           \
+	inline fix16_t name(const type x) {                                    \
+		return conversion(x);                                          \
 	}
 #else
-#define FIX_MAKE_INLINE_FROM(name, type, conversion) inline fix16_t name(const type x)
+#define FIX_MAKE_INLINE_FROM(name, type, conversion)                           \
+	inline fix16_t name(const type x)
 #endif
 
 FIX_MAKE_INLINE_FROM(FxFromInt, int32_t, Int2Fx);
 FIX_MAKE_INLINE_FROM(FxFromFloat, float, Float2Fx);
 FIX_MAKE_INLINE_FROM(FxFromDouble, double, Double2Fx);
-#define FxFrom(x) (_Generic((x), int: FxFromInt, long int: FxFromInt, float: FxFromFloat, double: FxFromDouble)(x))
+#define FxFrom(x)                                                              \
+	_Generic((x),                                                          \
+		int: FxFromInt,                                                \
+		long int: FxFromInt,                                           \
+		float: FxFromFloat,                                            \
+		double: FxFromDouble)(x)
 
 #endif
 
@@ -172,7 +178,8 @@ fix16_t Fsqrt(const fix16_t x)
 
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_sqrt.c
 	uint32_t num = (uint32_t)x;
-	uint32_t bit = (num & 0xFFF00000) ? (uint32_t)(1 << 30) : (uint32_t)(1 << 18);
+	uint32_t bit = (num & 0xFFF00000) ? (uint32_t)(1 << 30)
+	                                  : (uint32_t)(1 << 18);
 	while (bit > num)
 		bit >>= 2;
 

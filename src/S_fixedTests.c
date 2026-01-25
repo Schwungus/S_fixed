@@ -9,17 +9,18 @@ static int testsCounter = 0;
 
 // Check 4 decimal places max as trigonometry isn't spot-on in fixed point.
 #define Epsilon (1e-4)
-#define AssertEq(num, expr)                                                                                            \
-	do {                                                                                                           \
-		printf("Test #%d: ", testsCounter);                                                                    \
-		double res = Fx2Double((expr));                                                                        \
-		if (fabs(res - (num)) > Epsilon) {                                                                     \
-			printf("FAIL\n\n\"%s\" is %lf != %f\n", #expr, res, (num));                                    \
-			fflush(stdout);                                                                                \
-			return EXIT_FAILURE;                                                                           \
-		}                                                                                                      \
-		printf("SUCCESS (%.4lf ~== %.4f)\n", res, (num));                                                      \
-		testsCounter++;                                                                                        \
+#define AssertEq(num, expr)                                                    \
+	do {                                                                   \
+		printf("Test #%d: ", testsCounter);                            \
+		double res = Fx2Double((expr));                                \
+		if (fabs(res - (num)) > Epsilon) {                             \
+			printf("FAIL\n\n\"%s\" is %lf != %f\n", #expr, res,    \
+				(num));                                        \
+			fflush(stdout);                                        \
+			return EXIT_FAILURE;                                   \
+		}                                                              \
+		printf("SUCCESS (%.4lf ~== %.4f)\n", res, (num));              \
+		testsCounter++;                                                \
 	} while (0)
 
 #define Pi (3.1415926535897932384626433832795)
