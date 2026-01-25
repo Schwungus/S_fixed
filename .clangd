@@ -1,2 +1,4 @@
+If:
+  PathMatch: include/S_fixed\.h
 CompileFlags:
-  Add: [ -DFIX_IMPLEMENTATION ]
+  Add: [-DFIX_IMPLEMENTATION]

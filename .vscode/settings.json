@@ -1,5 +1,5 @@
 {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.formatOnSaveMode": "file",
     "C_Cpp.intelliSenseEngine": "disabled",
     "clangd.enable": true,
@@ -8,13 +8,14 @@
     "cmake.generator": "Ninja",
     "cmake.exportCompileCommandsFile": true,
     "files.exclude": {
-        ".cache": true,
-        "build": true
+        ".cache": true
+    },
+    "files.associations": {
+        "*.c": "c",
+        "*.h": "c"
     },
     "[c]": {
+        "editor.formatOnSave": true,
         "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-    },
-    "[cmake]": {
-        "editor.defaultFormatter": "cheshirekow.cmake-format"
     }
 }
