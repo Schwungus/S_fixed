@@ -25,11 +25,11 @@ typedef int64_t fix32_t;
 
 #ifdef FIX_IMPLEMENTATION
 #define FIX_INLINE_FROM(name, type, conversion)                                                                        \
-	inline fix16_t name(type x) {                                                                                  \
+	inline fix16_t name(const type x) {                                                                            \
 		return conversion(x);                                                                                  \
 	}
 #else
-#define FIX_INLINE_FROM(name, type, conversion) inline fix16_t name(type x);
+#define FIX_INLINE_FROM(name, type, conversion) inline fix16_t name(const type x);
 #endif
 
 FIX_INLINE_FROM(FxFromInt, int32_t, Int2Fx);
@@ -41,10 +41,16 @@ FIX_INLINE_FROM(FxFromDouble, double, Double2Fx);
 #endif
 
 #define Fadd(a, b) (((fix16_t)(a)) + ((fix16_t)(b)))
-#define Fsub(a, b) (((fix16_t)(a)) - ((fix16_t)(b)))
-#define Fmul(a, b) ((fix16_t)((((fix32_t)(a)) * ((fix32_t)(b))) >> FxFBits))
+#define FxAdd Fadd
 
-fix16_t Fdiv(fix16_t a, fix16_t b)
+#define Fsub(a, b) (((fix16_t)(a)) - ((fix16_t)(b)))
+#define FxSub Fsub
+
+#define Fmul(a, b) ((fix16_t)((((fix32_t)(a)) * ((fix32_t)(b))) >> FxFBits))
+#define FxMul Fmul
+
+inline fix16_t Fdiv(const fix16_t a, const fix16_t b)
+#define FxDiv Fdiv
 #ifdef FIX_IMPLEMENTATION
 {
 	if (b == FxZero)
@@ -55,7 +61,8 @@ fix16_t Fdiv(fix16_t a, fix16_t b)
 	;
 #endif
 
-fix16_t Fmod(fix16_t a, fix16_t b)
+inline fix16_t Fmod(const fix16_t a, const fix16_t b)
+#define FxMod Fmod
 #ifdef FIX_IMPLEMENTATION
 {
 	if (b == FxZero)
@@ -67,12 +74,19 @@ fix16_t Fmod(fix16_t a, fix16_t b)
 #endif
 
 #define Fhalf(a) (((fix16_t)(a)) >> 1)
+#define FxHalve Fhalf
+
 #define Fdouble(a) (((fix16_t)(a)) << 1)
+#define FxDouble Fdouble
 
 #define Ffrac(x) (((fix16_t)(x)) & FxFMask)
-#define Ffloor(x) (((fix16_t)(x)) & FxWMask)
+#define FxFrac Ffrac
 
-fix16_t Fceil(fix16_t x)
+#define Ffloor(x) (((fix16_t)(x)) & FxWMask)
+#define FxFloor Ffloor
+
+inline fix16_t Fceil(const fix16_t x)
+#define FxCeil Fceil
 #ifdef FIX_IMPLEMENTATION
 {
 	return Ffrac(x) ? Fadd(Ffloor(x), FxOne) : x;
@@ -81,7 +95,8 @@ fix16_t Fceil(fix16_t x)
 	;
 #endif
 
-fix16_t Fabs(fix16_t x)
+inline fix16_t Fabs(const fix16_t x)
+#define FxAbs Fabs
 #ifdef FIX_IMPLEMENTATION
 {
 	return (x < FxZero) ? -x : x;
@@ -90,7 +105,8 @@ fix16_t Fabs(fix16_t x)
 	;
 #endif
 
-fix16_t Fmin(fix16_t a, fix16_t b)
+inline fix16_t Fmin(const fix16_t a, const fix16_t b)
+#define FxMin Fmin
 #ifdef FIX_IMPLEMENTATION
 {
 	return (a < b) ? a : b;
@@ -99,7 +115,8 @@ fix16_t Fmin(fix16_t a, fix16_t b)
 	;
 #endif
 
-fix16_t Fmax(fix16_t a, fix16_t b)
+inline fix16_t Fmax(const fix16_t a, const fix16_t b)
+#define FxMax Fmax
 #ifdef FIX_IMPLEMENTATION
 {
 	return (a > b) ? a : b;
@@ -108,7 +125,8 @@ fix16_t Fmax(fix16_t a, fix16_t b)
 	;
 #endif
 
-fix16_t Fclamp(fix16_t x, fix16_t a, fix16_t b)
+inline fix16_t Fclamp(const fix16_t x, const fix16_t a, const fix16_t b)
+#define FxClamp Fclamp
 #ifdef FIX_IMPLEMENTATION
 {
 	return (x < a) ? a : ((x > b) ? b : x);
@@ -117,7 +135,8 @@ fix16_t Fclamp(fix16_t x, fix16_t a, fix16_t b)
 	;
 #endif
 
-fix16_t Flerp(fix16_t a, fix16_t b, fix16_t x)
+inline fix16_t Flerp(const fix16_t a, const fix16_t b, const fix16_t x)
+#define FxLerp Flerp
 #ifdef FIX_IMPLEMENTATION
 {
 	return Fadd(a, Fmul(Fsub(b, a), x));
@@ -132,10 +151,11 @@ fix16_t Flerp(fix16_t a, fix16_t b, fix16_t x)
 #define Fx2Pi (FxPi << 1)
 #define Fx3Pi4 ((Fx2Pi + FxPi) >> 2)
 
-#define Fdeg(x) Fmul(x, 0x00394BB8)
-#define Frad(x) Fmul(x, 0x00000478)
+#define FxDeg(x) Fmul(x, 0x00394BB8)
+#define FxRad(x) Fmul(x, 0x00000478)
 
-fix16_t Fsqr(fix16_t x)
+inline fix16_t Fsqr(const fix16_t x)
+#define FxSqr Fsqr
 #ifdef FIX_IMPLEMENTATION
 {
 	return Fmul(x, x);
@@ -144,7 +164,8 @@ fix16_t Fsqr(fix16_t x)
 	;
 #endif
 
-fix16_t Fsqrt(fix16_t x)
+fix16_t Fsqrt(const fix16_t x)
+#define FxSqrt Fsqrt
 #ifdef FIX_IMPLEMENTATION
 {
 	if (x <= FxZero)
@@ -189,6 +210,7 @@ fix16_t Fsqrt(fix16_t x)
 #endif
 
 fix16_t Fsin(fix16_t x)
+#define FxSin Fsin
 #ifdef FIX_IMPLEMENTATION
 {
 	x = x % Fx2Pi;
@@ -217,10 +239,16 @@ fix16_t Fsin(fix16_t x)
 #endif
 
 #define Fcos(x) (Fsin(Fadd(x, FxPi2)))
+#define FxCos Fcos
+
 #define Facos(x) (Fsub(FxPi2, Fasin(x)))
+#define FxAcos Facos
+
 #define Fatan(x) (Fatan2(x, FxOne))
+#define FxAtan Fatan
 
 fix16_t Ftan(fix16_t x)
+#define FxTan Ftan
 #ifdef FIX_IMPLEMENTATION
 {
 	return Fdiv(Fsin(x), Fcos(x));
@@ -230,20 +258,21 @@ fix16_t Ftan(fix16_t x)
 #endif
 
 fix16_t Fatan2(fix16_t y, fix16_t x)
+#define FxAtan2 Fatan2
 #ifdef FIX_IMPLEMENTATION
 {
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_trig.c#L150
-	fix16_t mask = y >> (sizeof(fix16_t) * 7);
-	fix16_t abs_y = (y + mask) ^ mask;
+	const fix16_t mask = y >> (sizeof(fix16_t) * 7);
+	const fix16_t abs_y = (y + mask) ^ mask;
 
 	fix16_t angle = FxZero;
 	if (x >= 0) {
-		fix16_t r = Fdiv(x - abs_y, x + abs_y);
-		fix16_t r3 = Fmul(Fmul(r, r), r);
+		const fix16_t r = Fdiv(x - abs_y, x + abs_y);
+		const fix16_t r3 = Fmul(Fmul(r, r), r);
 		angle = Fmul(0x00003240, r3) - Fmul(0x0000FB50, r) + FxPi4;
 	} else {
-		fix16_t r = Fdiv(x + abs_y, abs_y - x);
-		fix16_t r3 = Fmul(Fmul(r, r), r);
+		const fix16_t r = Fdiv(x + abs_y, abs_y - x);
+		const fix16_t r3 = Fmul(Fmul(r, r), r);
 		angle = Fmul(0x00003240, r3) - Fmul(0x0000FB50, r) + Fx3Pi4;
 	}
 
@@ -254,6 +283,7 @@ fix16_t Fatan2(fix16_t y, fix16_t x)
 #endif
 
 fix16_t Fasin(fix16_t x)
+#define FxAsin Fasin
 #ifdef FIX_IMPLEMENTATION
 {
 	if (x > FxOne || x < -FxOne)
