@@ -45,6 +45,7 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 | `Int2Fx(x)`        | Integer to fixed point                      |
 | `Float2Fx(x)`      | Float to fixed point[^3]                    |
 | `Double2Fx(x)`     | Double to fixed point[^3]                   |
+| `FxFrom(x)`        | Generic number-to-fixed-point conversion    |
 | `Fx2Int(x)`        | Fixed point to integer                      |
 | `Fx2Float(x)`      | Fixed point to float                        |
 | `Fx2Double(x)`     | Fixed point to double                       |

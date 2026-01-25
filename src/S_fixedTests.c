@@ -34,22 +34,22 @@ int main(int argc, char* argv[]) {
 	AssertEq(180.0 * DegToRad, FxPi);
 	AssertEq(360.0 * DegToRad, Fx2Pi);
 
-	AssertEq(13.0, Fadd(Int2Fx(4L), Int2Fx(9L)));
-	AssertEq(-3.0, Fsub(Int2Fx(5L), Int2Fx(8L)));
-	AssertEq(42.0, Fmul(Int2Fx(6L), Int2Fx(7L)));
-	AssertEq(7.0 / 6.0, Fdiv(Int2Fx(7L), Int2Fx(6L)));
-	AssertEq(1.5, Fmod(Double2Fx(7.5), Int2Fx(6L)));
+	AssertEq(13.0, Fadd(FxFrom(4L), FxFrom(9L)));
+	AssertEq(-3.0, Fsub(FxFrom(5L), FxFrom(8L)));
+	AssertEq(42.0, Fmul(FxFrom(6L), FxFrom(7L)));
+	AssertEq(7.0 / 6.0, Fdiv(FxFrom(7L), FxFrom(6L)));
+	AssertEq(1.5, Fmod(FxFrom(7.5), FxFrom(6L)));
 
-	AssertEq(4.5, Fhalf(Int2Fx(9L)));
-	AssertEq(18.0, Fdouble(Int2Fx(9L)));
+	AssertEq(4.5, Fhalf(FxFrom(9L)));
+	AssertEq(18.0, Fdouble(FxFrom(9L)));
 
-	AssertEq(0.0509, Ffrac(Double2Fx(127.0509)));
-	AssertEq(127.0, Ffloor(Double2Fx(127.0509)));
-	AssertEq(128.0, Fceil(Double2Fx(127.0509)));
+	AssertEq(0.0509, Ffrac(FxFrom(127.0509)));
+	AssertEq(127.0, Ffloor(FxFrom(127.0509)));
+	AssertEq(128.0, Fceil(FxFrom(127.0509)));
 
-	AssertEq(123.123, Fabs(Double2Fx(-123.123)));
-	AssertEq(81.0, Fsqr(Int2Fx(9L)));
-	AssertEq(9.0, Fsqrt(Int2Fx(81L)));
+	AssertEq(123.123, Fabs(FxFrom(-123.123)));
+	AssertEq(81.0, Fsqr(FxFrom(9L)));
+	AssertEq(9.0, Fsqrt(FxFrom(81L)));
 
 	AssertEq(1.0, Ftan(FxPi4));
 	AssertEq(45.0 * DegToRad, Fasin(Fsin(FxPi4)));

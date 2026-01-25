@@ -20,6 +20,26 @@ typedef int64_t fix32_t;
 #define Fx2Float(x) ((float)((float)(x) / (float)(FxOne)))     /* ! Unsafe ! */
 #define Fx2Double(x) ((double)((double)(x) / (double)(FxOne))) /* ! Unsafe ! */
 
+// C11 `_Generic` tricks, if available:
+#if __STDC_VERSION__ >= 201112L
+
+#ifdef FIX_IMPLEMENTATION
+#define FIX_INLINE_FROM(name, type, conversion)                                                                        \
+	inline fix16_t name(type x) {                                                                                  \
+		return conversion(x);                                                                                  \
+	}
+#else
+#define FIX_INLINE_FROM(name, type, conversion) inline fix16_t name(type x);
+#endif
+
+FIX_INLINE_FROM(FxFromInt, int32_t, Int2Fx);
+FIX_INLINE_FROM(FxFromFloat, float, Float2Fx);
+FIX_INLINE_FROM(FxFromDouble, double, Double2Fx);
+
+#define FxFrom(x) (_Generic((x), int: FxFromInt, long int: FxFromInt, float: FxFromFloat, double: FxFromDouble)(x))
+
+#endif
+
 #define Fadd(a, b) (((fix16_t)(a)) + ((fix16_t)(b)))
 #define Fsub(a, b) (((fix16_t)(a)) - ((fix16_t)(b)))
 #define Fmul(a, b) ((fix16_t)((((fix32_t)(a)) * ((fix32_t)(b))) >> FxFBits))
