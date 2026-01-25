@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD028 MD033 MD045 -->
+
 # S_fixed
 
 A header-only 16.16 fixed-point math library for C.
