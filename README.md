@@ -66,6 +66,7 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 | `Frad(x)`          | Degrees to radians[^1]                      |
 | `Fsqr(x)`          | Square[^1]                                  |
 | `Fsqrt(x)`         | Square root[^2]                             |
+| `Fcube(x)`         | Cube[^1]                                    |
 | `Fsin(x)`          | Sine                                        |
 | `Fcos(x)`          | Cosine                                      |
 | `Ftan(x)`          | Tangent[^1][^2]                             |
@@ -75,7 +76,7 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 | `Fatan2(y, x)`     | Arctangent of `y / x` with benefits[^1][^2] |
 
 [^1]: Overflow is possible.
-[^2]: Returns `0` on failure.
+[^2]: Quietly returns `0` on failure.
 [^3]: You should probably use this with common sense. Floats and fixed point don't go well together.<br>For paranoid people, it's more reliable to generate constant fixed point numbers from floats by typing `x * 65536` in a calculator and storing a truncated version of the result with a `fix16_t` cast.
 
 ## Constants

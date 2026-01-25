@@ -15,12 +15,15 @@ typedef int64_t fix32_t;
 #define FxHalf ((fix16_t)(0x00008000))
 #define FxZero ((fix16_t)(0))
 
-#define Int2Fx(x) ((fix16_t)((int32_t)(x) * FxOne))
-#define Float2Fx(x) ((fix16_t)((float)(x) * (float)FxOne))    // ! Unsafe !
-#define Double2Fx(x) ((fix16_t)((double)(x) * (double)FxOne)) // ! Unsafe !
-#define Fx2Int(x) ((int32_t)((fix16_t)(x) / FxOne))
-#define Fx2Float(x) ((float)((float)(x) / (float)(FxOne)))     // ! Unsafe !
-#define Fx2Double(x) ((double)((double)(x) / (double)(FxOne))) // ! Unsafe !
+#define Fx1 FxOne
+#define Fx0 FxZero
+
+#define Int2Fx(x) ((fix16_t)((int32_t)(x) * (int32_t)Fx1))
+#define Float2Fx(x) ((fix16_t)((float)(x) * (float)Fx1))    // ! Unsafe !
+#define Double2Fx(x) ((fix16_t)((double)(x) * (double)Fx1)) // ! Unsafe !
+#define Fx2Int(x) ((int32_t)((int32_t)(x) / (int32_t)Fx1))
+#define Fx2Float(x) ((float)((float)(x) / (float)(Fx1)))     // ! Unsafe !
+#define Fx2Double(x) ((double)((double)(x) / (double)(Fx1))) // ! Unsafe !
 
 // Use C11 `_Generic` tricks, if available:
 #if __STDC_VERSION__ >= 201112L
@@ -60,8 +63,8 @@ inline fix16_t Fdiv(const fix16_t a, const fix16_t b)
 #define FxDiv Fdiv
 #ifdef FIX_IMPLEMENTATION
 {
-	if (b == FxZero)
-		return FxZero;
+	if (!b)
+		return Fx0;
 	return (fix16_t)(((fix32_t)(a) << FxFBits) / (fix32_t)(b));
 }
 #else
@@ -72,9 +75,9 @@ inline fix16_t Fmod(const fix16_t a, const fix16_t b)
 #define FxMod Fmod
 #ifdef FIX_IMPLEMENTATION
 {
-	if (b == FxZero)
-		return FxZero;
-	return (fix16_t)(a % b);
+	if (!b)
+		return Fx0;
+	return a % b;
 }
 #else
 	;
@@ -96,7 +99,7 @@ inline fix16_t Fceil(const fix16_t x)
 #define FxCeil Fceil
 #ifdef FIX_IMPLEMENTATION
 {
-	return Ffrac(x) ? Fadd(Ffloor(x), FxOne) : x;
+	return Ffrac(x) ? Fadd(Ffloor(x), Fx1) : x;
 }
 #else
 	;
@@ -106,7 +109,7 @@ inline fix16_t Fabs(const fix16_t x)
 #define FxAbs Fabs
 #ifdef FIX_IMPLEMENTATION
 {
-	return (x < FxZero) ? -x : x;
+	return x < Fx0 ? -x : x;
 }
 #else
 	;
@@ -116,7 +119,7 @@ inline fix16_t Fmin(const fix16_t a, const fix16_t b)
 #define FxMin Fmin
 #ifdef FIX_IMPLEMENTATION
 {
-	return (a < b) ? a : b;
+	return a < b ? a : b;
 }
 #else
 	;
@@ -126,7 +129,7 @@ inline fix16_t Fmax(const fix16_t a, const fix16_t b)
 #define FxMax Fmax
 #ifdef FIX_IMPLEMENTATION
 {
-	return (a > b) ? a : b;
+	return a > b ? a : b;
 }
 #else
 	;
@@ -136,7 +139,7 @@ inline fix16_t Fclamp(const fix16_t x, const fix16_t a, const fix16_t b)
 #define FxClamp Fclamp
 #ifdef FIX_IMPLEMENTATION
 {
-	return (x < a) ? a : ((x > b) ? b : x);
+	return Fmin(Fmax(x, a), b);
 }
 #else
 	;
@@ -171,12 +174,22 @@ inline fix16_t Fsqr(const fix16_t x)
 	;
 #endif
 
+inline fix16_t Fcube(const fix16_t x)
+#define FxCube Fcube
+#ifdef FIX_IMPLEMENTATION
+{
+	return Fmul(x, Fsqr(x));
+}
+#else
+	;
+#endif
+
 fix16_t Fsqrt(const fix16_t x)
 #define FxSqrt Fsqrt
 #ifdef FIX_IMPLEMENTATION
 {
-	if (x <= FxZero)
-		return FxZero;
+	if (x <= Fx0)
+		return Fx0;
 
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_sqrt.c
 	uint32_t num = (uint32_t)x;
@@ -228,7 +241,7 @@ fix16_t Fsin(fix16_t x)
 		x += Fx2Pi;
 
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_trig.c#L89
-	fix16_t x2 = Fmul(x, x);
+	const fix16_t x2 = Fsqr(x);
 	fix16_t out = x;
 	x = Fmul(x, x2);
 	out -= x / 6L;
@@ -252,7 +265,7 @@ fix16_t Fsin(fix16_t x)
 #define Facos(x) (Fsub(FxPi2, Fasin(x)))
 #define FxAcos Facos
 
-#define Fatan(x) (Fatan2(x, FxOne))
+#define Fatan(x) (Fatan2(x, Fx1))
 #define FxAtan Fatan
 
 fix16_t Ftan(fix16_t x)
@@ -273,33 +286,30 @@ fix16_t Fatan2(fix16_t y, fix16_t x)
 	const fix16_t mask = y >> (sizeof(fix16_t) * 7);
 	const fix16_t abs_y = (y + mask) ^ mask;
 
-	fix16_t angle = FxZero;
+	fix16_t angle = Fx0;
 	if (x >= 0) {
 		const fix16_t r = Fdiv(x - abs_y, x + abs_y);
-		const fix16_t r3 = Fmul(Fmul(r, r), r);
-		angle = Fmul(0x00003240, r3) - Fmul(0x0000FB50, r) + FxPi4;
+		angle = Fmul(0x3240, Fcube(r)) - Fmul(0xFB50, r) + FxPi4;
 	} else {
 		const fix16_t r = Fdiv(x + abs_y, abs_y - x);
-		const fix16_t r3 = Fmul(Fmul(r, r), r);
-		angle = Fmul(0x00003240, r3) - Fmul(0x0000FB50, r) + Fx3Pi4;
+		angle = Fmul(0x3240, Fcube(r)) - Fmul(0xFB50, r) + Fx3Pi4;
 	}
 
-	return (y < 0) ? -angle : angle;
+	return y < 0 ? -angle : angle;
 }
 #else
 	;
 #endif
 
-fix16_t Fasin(fix16_t x)
+fix16_t Fasin(const fix16_t x)
 #define FxAsin Fasin
 #ifdef FIX_IMPLEMENTATION
 {
-	if (x > FxOne || x < -FxOne)
-		return FxZero;
-	fix16_t out = Fsub(FxOne, Fmul(x, x));
+	if (x > Fx1 || x < -Fx1)
+		return Fx0;
+	fix16_t out = Fsub(Fx1, Fsqr(x));
 	out = Fdiv(x, Fsqrt(out));
-	out = Fatan(out);
-	return out;
+	return Fatan(out);
 }
 #else
 	;
