@@ -10,7 +10,7 @@ In your `main.c` file, compile this library's function definitions by writing:
 
 ```c
 #define FIX_IMPLEMENTATION
-#include "S_fixed.h"
+#include <S_fixed.h>
 
 int main(int argc, char* argv[]) {
     // your code goes here...
@@ -22,7 +22,7 @@ Everywhere else, include the header normally to add the library's functions and 
 ```c
 #pragma once
 
-#include "S_fixed.h"
+#include <S_fixed.h>
 
 int my_epic_function();
 // and so on...
@@ -40,10 +40,10 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 
 | Function           | Description                                 |
 | ------------------ | ------------------------------------------- |
+| `FxFrom(x)`        | Generic number-to-fixed-point conversion    |
 | `Int2Fx(x)`        | Integer to fixed point                      |
 | `Float2Fx(x)`      | Float to fixed point[^3]                    |
 | `Double2Fx(x)`     | Double to fixed point[^3]                   |
-| `FxFrom(x)`        | Generic number-to-fixed-point conversion    |
 | `Fx2Int(x)`        | Fixed point to integer                      |
 | `Fx2Float(x)`      | Fixed point to float                        |
 | `Fx2Double(x)`     | Fixed point to double                       |
