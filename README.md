@@ -38,8 +38,6 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 
 ## Functions
 
-### Basic
-
 | Function           | Description                                 |
 | ------------------ | ------------------------------------------- |
 | `Int2Fx(x)`        | Integer to fixed point                      |
@@ -92,3 +90,15 @@ The trigonometry functions were based on libfixmath's implementations and simpli
 | `FxPi2`  | Fixed point representation of `pi / 2` (16 decimals)       |
 | `Fx2Pi`  | Fixed point representation of `2 * pi` (16 decimals)       |
 | `Fx3Pi4` | Fixed point representation of `(3 * pi) / 4` (16 decimals) |
+
+## Advanced usage
+
+You can define `FIX_NOSTD` if you're using e.g. SDL3 which includes/defines the integer types from `stdint.h` for you:
+
+```c
+#include <SDL3/SDL_stdinc.h>
+
+#define FIX_NOSTD
+#define FIX_IMPLEMENTATION
+#include <S_fixed.h>
+```

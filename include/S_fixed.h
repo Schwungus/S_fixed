@@ -1,6 +1,8 @@
 #pragma once
 
+#ifndef FIX_NOSTD
 #include <stdint.h>
+#endif
 
 #define FxFBits (16)
 #define FxWMask ((fix16_t)(0xFFFF0000))
