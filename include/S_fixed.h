@@ -28,21 +28,12 @@ typedef int64_t fix32_t;
 // Use C11 `_Generic` tricks, if available:
 #if __STDC_VERSION__ >= 201112L
 
-#define FIX_MAKE_INLINE_FROM(name, type, conversion)                           \
-	inline fix16_t name(const type x) {                                    \
-		return conversion(x);                                          \
-	}
-
-FIX_MAKE_INLINE_FROM(FxFromInt, int32_t, Int2Fx);
-FIX_MAKE_INLINE_FROM(FxFromFloat, float, Float2Fx);
-FIX_MAKE_INLINE_FROM(FxFromDouble, double, Double2Fx);
-
 #define FxFrom(x)                                                              \
 	_Generic((x),                                                          \
-		int: FxFromInt,                                                \
-		long int: FxFromInt,                                           \
-		float: FxFromFloat,                                            \
-		double: FxFromDouble)(x)
+		int: Int2Fx(x),                                                \
+		long int: Int2Fx(x),                                           \
+		float: Float2Fx(x),                                            \
+		double: Double2Fx(x))
 
 #endif
 
@@ -55,7 +46,7 @@ FIX_MAKE_INLINE_FROM(FxFromDouble, double, Double2Fx);
 #define Fmul(a, b) ((fix16_t)((((fix32_t)(a)) * ((fix32_t)(b))) >> FxFBits))
 #define FxMul Fmul
 
-inline fix16_t Fdiv(const fix16_t a, const fix16_t b)
+fix16_t Fdiv(const fix16_t a, const fix16_t b)
 #define FxDiv Fdiv
 #ifdef FIX_IMPLEMENTATION
 {
@@ -67,7 +58,7 @@ inline fix16_t Fdiv(const fix16_t a, const fix16_t b)
 	;
 #endif
 
-inline fix16_t Fmod(const fix16_t a, const fix16_t b)
+fix16_t Fmod(const fix16_t a, const fix16_t b)
 #define FxMod Fmod
 #ifdef FIX_IMPLEMENTATION
 {
@@ -91,7 +82,7 @@ inline fix16_t Fmod(const fix16_t a, const fix16_t b)
 #define Ffloor(x) (((fix16_t)(x)) & FxWMask)
 #define FxFloor Ffloor
 
-inline fix16_t Fceil(const fix16_t x)
+fix16_t Fceil(const fix16_t x)
 #define FxCeil Fceil
 #ifdef FIX_IMPLEMENTATION
 {
@@ -101,7 +92,7 @@ inline fix16_t Fceil(const fix16_t x)
 	;
 #endif
 
-inline fix16_t Fabs(const fix16_t x)
+fix16_t Fabs(const fix16_t x)
 #define FxAbs Fabs
 #ifdef FIX_IMPLEMENTATION
 {
@@ -111,7 +102,7 @@ inline fix16_t Fabs(const fix16_t x)
 	;
 #endif
 
-inline fix16_t Fmin(const fix16_t a, const fix16_t b)
+fix16_t Fmin(const fix16_t a, const fix16_t b)
 #define FxMin Fmin
 #ifdef FIX_IMPLEMENTATION
 {
@@ -121,7 +112,7 @@ inline fix16_t Fmin(const fix16_t a, const fix16_t b)
 	;
 #endif
 
-inline fix16_t Fmax(const fix16_t a, const fix16_t b)
+fix16_t Fmax(const fix16_t a, const fix16_t b)
 #define FxMax Fmax
 #ifdef FIX_IMPLEMENTATION
 {
@@ -131,7 +122,7 @@ inline fix16_t Fmax(const fix16_t a, const fix16_t b)
 	;
 #endif
 
-inline fix16_t Fclamp(const fix16_t x, const fix16_t a, const fix16_t b)
+fix16_t Fclamp(const fix16_t x, const fix16_t a, const fix16_t b)
 #define FxClamp Fclamp
 #ifdef FIX_IMPLEMENTATION
 {
@@ -141,7 +132,7 @@ inline fix16_t Fclamp(const fix16_t x, const fix16_t a, const fix16_t b)
 	;
 #endif
 
-inline fix16_t Flerp(const fix16_t a, const fix16_t b, const fix16_t x)
+fix16_t Flerp(const fix16_t a, const fix16_t b, const fix16_t x)
 #define FxLerp Flerp
 #ifdef FIX_IMPLEMENTATION
 {
@@ -160,7 +151,7 @@ inline fix16_t Flerp(const fix16_t a, const fix16_t b, const fix16_t x)
 #define FxDeg(x) Fmul(x, 3754936L)
 #define FxRad(x) Fmul(x, 1144L)
 
-inline fix16_t Fsqr(const fix16_t x)
+fix16_t Fsqr(const fix16_t x)
 #define FxSqr Fsqr
 #ifdef FIX_IMPLEMENTATION
 {
@@ -170,7 +161,7 @@ inline fix16_t Fsqr(const fix16_t x)
 	;
 #endif
 
-inline fix16_t Fcube(const fix16_t x)
+fix16_t Fcube(const fix16_t x)
 #define FxCube Fcube
 #ifdef FIX_IMPLEMENTATION
 {
