@@ -4,16 +4,16 @@
 #include <stdint.h>
 #endif
 
-#define FxFBits (16)
+#define FxFBits (16L)
 #define FxWMask ((fix16_t)(0xFFFF0000))
 #define FxFMask ((fix16_t)(0x0000FFFF))
 
 typedef int32_t fix16_t;
 typedef int64_t fix32_t;
 
-#define FxOne ((fix16_t)(0x00010000))
-#define FxHalf ((fix16_t)(0x00008000))
-#define FxZero ((fix16_t)(0))
+#define FxOne ((fix16_t)(65536L))
+#define FxHalf ((fix16_t)(32768L))
+#define FxZero ((fix16_t)(0L))
 
 #define Fx1 FxOne
 #define Fx0 FxZero
@@ -63,7 +63,7 @@ inline fix16_t Fdiv(const fix16_t a, const fix16_t b)
 #define FxDiv Fdiv
 #ifdef FIX_IMPLEMENTATION
 {
-	if (!b)
+	if (b == Fx0)
 		return Fx0;
 	return (fix16_t)(((fix32_t)(a) << FxFBits) / (fix32_t)(b));
 }
@@ -75,7 +75,7 @@ inline fix16_t Fmod(const fix16_t a, const fix16_t b)
 #define FxMod Fmod
 #ifdef FIX_IMPLEMENTATION
 {
-	if (!b)
+	if (b == Fx0)
 		return Fx0;
 	return a % b;
 }
@@ -83,10 +83,10 @@ inline fix16_t Fmod(const fix16_t a, const fix16_t b)
 	;
 #endif
 
-#define Fhalf(a) (((fix16_t)(a)) >> 1)
+#define Fhalf(a) (((fix16_t)(a)) >> 1L)
 #define FxHalve Fhalf
 
-#define Fdouble(a) (((fix16_t)(a)) << 1)
+#define Fdouble(a) (((fix16_t)(a)) << 1L)
 #define FxDouble Fdouble
 
 #define Ffrac(x) (((fix16_t)(x)) & FxFMask)
@@ -155,14 +155,14 @@ inline fix16_t Flerp(const fix16_t a, const fix16_t b, const fix16_t x)
 	;
 #endif
 
-#define FxPi ((fix16_t)(0x0003243F))
-#define FxPi4 (FxPi >> 2)
-#define FxPi2 (FxPi >> 1)
-#define Fx2Pi (FxPi << 1)
-#define Fx3Pi4 ((Fx2Pi + FxPi) >> 2)
+#define FxPi ((fix16_t)(205887L))
+#define FxPi4 (FxPi >> 2L)
+#define FxPi2 (FxPi >> 1L)
+#define Fx2Pi (FxPi << 1L)
+#define Fx3Pi4 ((Fx2Pi + FxPi) >> 2L)
 
-#define FxDeg(x) Fmul(x, 0x00394BB8)
-#define FxRad(x) Fmul(x, 0x00000478)
+#define FxDeg(x) Fmul(x, 3754936L)
+#define FxRad(x) Fmul(x, 1144L)
 
 inline fix16_t Fsqr(const fix16_t x)
 #define FxSqr Fsqr
@@ -193,23 +193,22 @@ fix16_t Fsqrt(const fix16_t x)
 
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_sqrt.c
 	uint32_t num = (uint32_t)x;
-	uint32_t bit = (num & 0xFFF00000) ? (uint32_t)(1 << 30)
-	                                  : (uint32_t)(1 << 18);
+	uint32_t bit = (num & 0xFFF00000) ? (1L << 30L) : (1L << 18L);
 	while (bit > num)
-		bit >>= 2;
+		bit >>= 2L;
 
-	uint32_t out = 0;
-	for (uint8_t n = 0; n < 2; n++) {
-		while (bit) {
+	uint32_t out = 0L;
+	for (uint8_t n = 0L; n < 2L; n++) {
+		while (bit > 0L) {
 			if (num >= (out + bit)) {
 				num -= out + bit;
-				out = (out >> 1) + bit;
+				out = (out >> 1L) + bit;
 			} else {
-				out >>= 1;
+				out >>= 1L;
 			}
-			bit >>= 2;
+			bit >>= 2L;
 		}
-		if (n == 0) {
+		if (n == 0L) {
 			if (num > FxFMask) {
 				num -= out;
 				num = (num << FxFBits) - FxHalf;
@@ -218,7 +217,7 @@ fix16_t Fsqrt(const fix16_t x)
 				num <<= FxFBits;
 				out <<= FxFBits;
 			}
-			bit = 1 << (FxFBits - 2);
+			bit = 1L << (FxFBits - 2L);
 		}
 	}
 
@@ -283,19 +282,19 @@ fix16_t Fatan2(fix16_t y, fix16_t x)
 #ifdef FIX_IMPLEMENTATION
 {
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_trig.c#L150
-	const fix16_t mask = y >> (sizeof(fix16_t) * 7);
+	const fix16_t mask = y >> (sizeof(fix16_t) * 7L);
 	const fix16_t abs_y = (y + mask) ^ mask;
 
 	fix16_t angle = Fx0;
-	if (x >= 0) {
+	if (x >= 0L) {
 		const fix16_t r = Fdiv(x - abs_y, x + abs_y);
-		angle = Fmul(0x3240, Fcube(r)) - Fmul(0xFB50, r) + FxPi4;
+		angle = Fmul(12864L, Fcube(r)) - Fmul(64336L, r) + FxPi4;
 	} else {
 		const fix16_t r = Fdiv(x + abs_y, abs_y - x);
-		angle = Fmul(0x3240, Fcube(r)) - Fmul(0xFB50, r) + Fx3Pi4;
+		angle = Fmul(12864L, Fcube(r)) - Fmul(64336L, r) + Fx3Pi4;
 	}
 
-	return y < 0 ? -angle : angle;
+	return y < Fx0 ? -angle : angle;
 }
 #else
 	;
