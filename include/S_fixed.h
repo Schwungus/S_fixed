@@ -221,9 +221,9 @@ fix16_t Fsin(fix16_t x)
 #ifdef FIX_IMPLEMENTATION
 {
 	x = x % Fx2Pi;
-	if (x > FxPi)
+	while (x > FxPi)
 		x -= Fx2Pi;
-	else if (x < -FxPi)
+	while (x < -FxPi)
 		x += Fx2Pi;
 
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_trig.c#L89
