@@ -18,10 +18,10 @@ typedef int64_t fix32_t;
 #define Fx1 FxOne
 #define Fx0 FxZero
 
-#define Int2Fx(x) ((fix16_t)((int32_t)(x) * (int32_t)Fx1))
-#define Float2Fx(x) ((fix16_t)((float)(x) * (float)Fx1))    // ! Unsafe !
-#define Double2Fx(x) ((fix16_t)((double)(x) * (double)Fx1)) // ! Unsafe !
-#define Fx2Int(x) ((int32_t)((int32_t)(x) / (int32_t)Fx1))
+#define Int2Fx(x) ((fix16_t)((int32_t)(x) * (int32_t)Fx1))   //
+#define Float2Fx(x) ((fix16_t)((float)(x) * (float)Fx1))     // ! Unsafe !
+#define Double2Fx(x) ((fix16_t)((double)(x) * (double)Fx1))  // ! Unsafe !
+#define Fx2Int(x) ((int32_t)((int32_t)(x) / (int32_t)Fx1))   //
 #define Fx2Float(x) ((float)((float)(x) / (float)(Fx1)))     // ! Unsafe !
 #define Fx2Double(x) ((double)((double)(x) / (double)(Fx1))) // ! Unsafe !
 
