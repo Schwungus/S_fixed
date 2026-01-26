@@ -28,19 +28,15 @@ typedef int64_t fix32_t;
 // Use C11 `_Generic` tricks, if available:
 #if __STDC_VERSION__ >= 201112L
 
-#ifdef FIX_IMPLEMENTATION
 #define FIX_MAKE_INLINE_FROM(name, type, conversion)                           \
 	inline fix16_t name(const type x) {                                    \
 		return conversion(x);                                          \
 	}
-#else
-#define FIX_MAKE_INLINE_FROM(name, type, conversion)                           \
-	inline fix16_t name(const type x)
-#endif
 
 FIX_MAKE_INLINE_FROM(FxFromInt, int32_t, Int2Fx);
 FIX_MAKE_INLINE_FROM(FxFromFloat, float, Float2Fx);
 FIX_MAKE_INLINE_FROM(FxFromDouble, double, Double2Fx);
+
 #define FxFrom(x)                                                              \
 	_Generic((x),                                                          \
 		int: FxFromInt,                                                \
