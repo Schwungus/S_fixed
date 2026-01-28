@@ -4,11 +4,14 @@
     "C_Cpp.intelliSenseEngine": "disabled",
     "clangd.enable": true,
     "clangd.enableCodeCompletion": true,
-    "clangd.arguments": ["--header-insertion=never"],
+    "clangd.arguments": [
+        "--header-insertion=never"
+    ],
     "cmake.generator": "Ninja",
     "cmake.exportCompileCommandsFile": true,
     "files.exclude": {
-        ".cache": true
+        ".cache": true,
+        "__cmake*": true
     },
     "files.associations": {
         "*.c": "c",
