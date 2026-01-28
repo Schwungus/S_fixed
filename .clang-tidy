@@ -1,15 +1,9 @@
-Checks: |
-  clang-diagnostic-*,
+Checks: [
   clang-analyzer-*,
   bugprone-*,
-  -bugprone-easily-swappable-parameters,
-  -bugprone-reserved-identifier,
+  -bugprone-easily-swappable-parameters, # false positives for x/y parameters
   performance-*,
-  -performance-no-int-to-ptr,
   portability-*,
   misc-*,
-  -misc-definitions-in-headers,
-  -misc-unused-parameters,
-  -misc-use-anonymous-namespace,
-  -misc-non-private-member-variables-in-classes,
-  cppcoreguidelines-init-variables
+  cppcoreguidelines-init-variables,
+]

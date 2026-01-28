@@ -27,6 +27,8 @@ static int testsCounter = 0;
 #define DegToRad (Pi / 180.0)
 
 int main(int argc, char* argv[]) {
+	(void)argc, (void)argv;
+
 	AssertEq(0.0, FxZero);
 	AssertEq(0.5, FxHalf);
 	AssertEq(1.0, FxOne);
