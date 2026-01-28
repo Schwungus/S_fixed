@@ -5,8 +5,8 @@
 #endif
 
 #define FxFBits (16L)
-#define FxWMask ((fix16_t)(0xFFFF0000))
-#define FxFMask ((fix16_t)(0x0000FFFF))
+#define FxWMask ((fix16_t)(0xFFFF0000L))
+#define FxFMask ((fix16_t)(0x0000FFFFL))
 
 typedef int32_t fix16_t;
 typedef int64_t fix32_t;
@@ -180,7 +180,7 @@ fix16_t Fsqrt(const fix16_t x)
 
 	// https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_sqrt.c
 	uint32_t num = (uint32_t)x;
-	uint32_t bit = (num & 0xFFF00000) ? (1L << 30L) : (1L << 18L);
+	uint32_t bit = (num & 0xFFF00000L) ? (1L << 30L) : (1L << 18L);
 	while (bit > num)
 		bit >>= 2L;
 
