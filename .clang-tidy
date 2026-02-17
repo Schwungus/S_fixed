@@ -1,9 +1,9 @@
 Checks: [
-  clang-analyzer-*,
-  bugprone-*,
-  -bugprone-easily-swappable-parameters, # false positives for x/y parameters
-  performance-*,
-  portability-*,
-  misc-*,
-  cppcoreguidelines-init-variables,
-]
+    clang-analyzer-*,
+    bugprone-*,
+    -bugprone-easily-swappable-parameters, # false positives for x/y parameters
+    performance-*,
+    portability-*,
+    misc-*,
+    cppcoreguidelines-init-variables,
+  ]
