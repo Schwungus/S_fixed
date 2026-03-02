@@ -12,7 +12,7 @@ static int testsCounter = 0;
 #define AssertEq(num, expr)                                                    \
 	do {                                                                   \
 		printf("Test #%d: ", testsCounter);                            \
-		double res = Fx2Double((expr));                                \
+		double res = FxToDouble((expr));                               \
 		if (fabs(res - (num)) > Epsilon) {                             \
 			printf("FAIL\n\n\"%s\" is %lf != %f\n", #expr, res,    \
 				(num));                                        \

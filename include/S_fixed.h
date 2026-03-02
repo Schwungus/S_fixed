@@ -18,12 +18,21 @@ typedef int64_t fix32_t;
 #define Fx1 FxOne
 #define Fx0 FxZero
 
-#define Int2Fx(x) ((fix16_t)((int32_t)(x) * (int32_t)Fx1))   //
-#define Float2Fx(x) ((fix16_t)((float)(x) * (float)Fx1))     // ! Unsafe !
-#define Double2Fx(x) ((fix16_t)((double)(x) * (double)Fx1))  // ! Unsafe !
-#define Fx2Int(x) ((int32_t)((int32_t)(x) / (int32_t)Fx1))   //
-#define Fx2Float(x) ((float)((float)(x) / (float)(Fx1)))     // ! Unsafe !
-#define Fx2Double(x) ((double)((double)(x) / (double)(Fx1))) // ! Unsafe !
+#define Int2Fx(x) ((fix16_t)((int32_t)(x) * (int32_t)Fx1))
+#define Float2Fx(x) ((fix16_t)((float)(x) * (float)Fx1))    // ! Unsafe !
+#define Double2Fx(x) ((fix16_t)((double)(x) * (double)Fx1)) // ! Unsafe !
+
+#define Fx2Int(x) ((int32_t)(x) / (int32_t)Fx1)
+#define Fx2Float(x) ((float)(x) / (float)(Fx1))    // ! Unsafe !
+#define Fx2Double(x) ((double)(x) / (double)(Fx1)) // ! Unsafe !
+
+#define IntToFx Int2Fx
+#define FloatToFx Float2Fx
+#define DoubleToFx Double2Fx
+
+#define FxToInt Fx2Int
+#define FxToFloat Fx2Float
+#define FxToDouble Fx2Double
 
 // Use C11 `_Generic` tricks, if available:
 #if __STDC_VERSION__ >= 201112L
