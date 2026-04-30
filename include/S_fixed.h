@@ -122,7 +122,7 @@ Fixed Fmax(register Fixed a, register Fixed b)
     ;
 #endif
 
-#define Fclamp(x) Fmin(Fmax(x, a), b)
+#define Fclamp(x, a, b) Fmin(Fmax((x), (a)), (b))
 #define FxClamp Fclamp
 
 Fixed Flerp(register Fixed a, register Fixed b, register Fixed x)
