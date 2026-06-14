@@ -267,11 +267,11 @@ Fixed Fatan2(register Fixed y, register Fixed x)
 #ifdef FIX_IMPLEMENTATION
 {
     // https://github.com/PetteriAimonen/libfixmath/blob/master/libfixmath/fix16_trig.c#L159
-    const Fixed mask = y >> (sizeof(Fixed) * 7);
+    const Fixed mask = y >> ((sizeof(Fixed) * 8) - 1);
     const Fixed abs_y = (y + mask) ^ mask;
 
     Fixed angle = Fx0;
-    if (x >= 0) {
+    if (x >= Fx0) {
         const Fixed r = Fdiv(x - abs_y, x + abs_y);
         angle = Fmul(12864, Fcube(r)) - Fmul(64336, r) + FxPi4;
     } else {

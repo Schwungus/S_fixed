@@ -28,9 +28,9 @@ static int testsCounter = 0;
 int main(int argc, char* argv[]) {
     (void)argc, (void)argv;
 
-    AssertEq(0.0, FxZero);
+    AssertEq(0.0, Fx0);
     AssertEq(0.5, FxHalf);
-    AssertEq(1.0, FxOne);
+    AssertEq(1.0, Fx1);
 
     AssertEq(90.0 * DegToRad, FxPi2);
     AssertEq(180.0 * DegToRad, FxPi);
