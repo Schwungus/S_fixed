@@ -50,7 +50,7 @@ typedef int64_t Fixed64;
 #define Fmul(a, b) ((Fixed)(((Fixed64)(a) * (Fixed64)(b)) >> FxFBits))
 #define FxMul Fmul
 
-Fixed Fdiv(register Fixed a, register Fixed b)
+Fixed Fdiv(Fixed a, Fixed b)
 #define FxDiv Fdiv
 #ifdef FIX_IMPLEMENTATION
 {
@@ -60,7 +60,7 @@ Fixed Fdiv(register Fixed a, register Fixed b)
     ;
 #endif
 
-Fixed Fmod(register Fixed a, register Fixed b)
+Fixed Fmod(Fixed a, Fixed b)
 #define FxMod Fmod
 #ifdef FIX_IMPLEMENTATION
 {
@@ -82,7 +82,7 @@ Fixed Fmod(register Fixed a, register Fixed b)
 #define Ffloor(x) ((Fixed)(x) & FxWMask)
 #define FxFloor Ffloor
 
-Fixed Fceil(register Fixed x)
+Fixed Fceil(Fixed x)
 #define FxCeil Fceil
 #ifdef FIX_IMPLEMENTATION
 {
@@ -92,7 +92,7 @@ Fixed Fceil(register Fixed x)
     ;
 #endif
 
-Fixed Fabs(register Fixed x)
+Fixed Fabs(Fixed x)
 #define FxAbs Fabs
 #ifdef FIX_IMPLEMENTATION
 {
@@ -102,7 +102,7 @@ Fixed Fabs(register Fixed x)
     ;
 #endif
 
-Fixed Fmin(register Fixed a, register Fixed b)
+Fixed Fmin(Fixed a, Fixed b)
 #define FxMin Fmin
 #ifdef FIX_IMPLEMENTATION
 {
@@ -112,7 +112,7 @@ Fixed Fmin(register Fixed a, register Fixed b)
     ;
 #endif
 
-Fixed Fmax(register Fixed a, register Fixed b)
+Fixed Fmax(Fixed a, Fixed b)
 #define FxMax Fmax
 #ifdef FIX_IMPLEMENTATION
 {
@@ -125,7 +125,7 @@ Fixed Fmax(register Fixed a, register Fixed b)
 #define Fclamp(x, a, b) Fmin(Fmax((x), (a)), (b))
 #define FxClamp Fclamp
 
-Fixed Flerp(register Fixed a, register Fixed b, register Fixed x)
+Fixed Flerp(Fixed a, Fixed b, Fixed x)
 #define FxLerp Flerp
 #ifdef FIX_IMPLEMENTATION
 {
@@ -144,7 +144,7 @@ Fixed Flerp(register Fixed a, register Fixed b, register Fixed x)
 #define FxDeg(x) Fmul(x, 3754936)
 #define FxRad(x) Fmul(x, 1144)
 
-Fixed Fsqr(register Fixed x)
+Fixed Fsqr(Fixed x)
 #define FxSqr Fsqr
 #ifdef FIX_IMPLEMENTATION
 {
@@ -154,7 +154,7 @@ Fixed Fsqr(register Fixed x)
     ;
 #endif
 
-Fixed Fcube(register Fixed x)
+Fixed Fcube(Fixed x)
 #define FxCube Fcube
 #ifdef FIX_IMPLEMENTATION
 {
@@ -164,7 +164,7 @@ Fixed Fcube(register Fixed x)
     ;
 #endif
 
-Fixed Fsqrt(register Fixed x)
+Fixed Fsqrt(Fixed x)
 #define FxSqrt Fsqrt
 #ifdef FIX_IMPLEMENTATION
 {
@@ -213,7 +213,7 @@ Fixed Fsqrt(register Fixed x)
     ;
 #endif
 
-Fixed Fsin(register Fixed x)
+Fixed Fsin(Fixed x)
 #define FxSin Fsin
 #ifdef FIX_IMPLEMENTATION
 {
@@ -252,7 +252,7 @@ Fixed Fsin(register Fixed x)
 #define Fatan(x) (Fatan2(x, Fx1))
 #define FxAtan Fatan
 
-Fixed Ftan(register Fixed x)
+Fixed Ftan(Fixed x)
 #define FxTan Ftan
 #ifdef FIX_IMPLEMENTATION
 {
@@ -262,7 +262,7 @@ Fixed Ftan(register Fixed x)
     ;
 #endif
 
-Fixed Fatan2(register Fixed y, register Fixed x)
+Fixed Fatan2(Fixed y, Fixed x)
 #define FxAtan2 Fatan2
 #ifdef FIX_IMPLEMENTATION
 {
@@ -285,7 +285,7 @@ Fixed Fatan2(register Fixed y, register Fixed x)
     ;
 #endif
 
-Fixed Fasin(register Fixed x)
+Fixed Fasin(Fixed x)
 #define FxAsin Fasin
 #ifdef FIX_IMPLEMENTATION
 {
