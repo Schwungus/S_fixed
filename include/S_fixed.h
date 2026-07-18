@@ -1,4 +1,9 @@
-#pragma once
+#ifndef S_FIXED_H
+#define S_FIXED_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef FIX_NOSTD
 #include <stdint.h>
@@ -300,3 +305,9 @@ Fixed Fasin(Fixed x)
 #else
     ;
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // S_FIXED_H
