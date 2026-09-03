@@ -23,6 +23,9 @@ typedef int64_t Fixed64;
 #define Fx1 FxOne
 #define Fx0 FxZero
 
+#define FxLower ((Fixed)(~0x7FFFFFFF))
+#define FxUpper ((Fixed)0x7FFFFFFF)
+
 #define Int2Fx(x) ((Fixed)((int32_t)(x) * (int32_t)Fx1))
 #define Float2Fx(x) ((Fixed)((float)(x) * (float)Fx1))    // ! Unsafe !
 #define Double2Fx(x) ((Fixed)((double)(x) * (double)Fx1)) // ! Unsafe !
