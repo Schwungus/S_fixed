@@ -58,25 +58,11 @@ typedef int64_t Fixed64;
 #define Fmul(a, b) ((Fixed)(((Fixed64)(a) * (Fixed64)(b)) >> FxFBits))
 #define FxMul Fmul
 
-Fixed Fdiv(Fixed a, Fixed b)
+#define Fdiv(a, b) ((Fixed)(((Fixed64)(a) << FxFBits) / (Fixed64)(b)))
 #define FxDiv Fdiv
-#ifdef FIX_IMPLEMENTATION
-{
-    return (b == Fx0) ? Fx0 : (Fixed)(((Fixed64)a << FxFBits) / (Fixed64)b);
-}
-#else
-    ;
-#endif
 
-Fixed Fmod(Fixed a, Fixed b)
+#define Fmod(a, b) ((Fixed)((a) % (b)))
 #define FxMod Fmod
-#ifdef FIX_IMPLEMENTATION
-{
-    return (b == Fx0) ? Fx0 : (Fixed)(a % b);
-}
-#else
-    ;
-#endif
 
 #define Fhalf(a) ((Fixed)(a) >> 1)
 #define FxHalve Fhalf
