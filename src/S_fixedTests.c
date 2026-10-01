@@ -47,6 +47,8 @@ int main(int argc, char* argv[]) {
 
     AssertEq(0.0509, Ffrac(FxFrom(127.0509)));
     AssertEq(127.0, Ffloor(FxFrom(127.0509)));
+
+    AssertEq(127.0, Fceil(FxFrom(127.0)));
     AssertEq(128.0, Fceil(FxFrom(127.0509)));
 
     AssertEq(123.123, Fabs(FxFrom(-123.123)));

@@ -42,11 +42,9 @@ typedef int64_t Fixed64;
 #define FxToFloat Fx2Float
 #define FxToDouble Fx2Double
 
-// Use C11 `_Generic` tricks, if available:
+// use C11 `_Generic` tricks, if available:
 #if __STDC_VERSION__ >= 201112L
-
 #define FxFrom(x) _Generic((x), int: Int2Fx(x), long int: Int2Fx(x), float: Float2Fx(x), double: Double2Fx(x))
-
 #endif
 
 #define Fadd(a, b) ((Fixed)(a) + (Fixed)(b))
@@ -76,15 +74,8 @@ typedef int64_t Fixed64;
 #define Ffloor(x) ((Fixed)(x) & FxWMask)
 #define FxFloor Ffloor
 
-Fixed Fceil(Fixed x)
+#define Fceil(x) (((x) + FxFMask) & FxWMask)
 #define FxCeil Fceil
-#ifdef FIX_IMPLEMENTATION
-{
-    return Ffrac(x) ? Fadd(Ffloor(x), Fx1) : x;
-}
-#else
-    ;
-#endif
 
 Fixed Fabs(Fixed x)
 #define FxAbs Fabs
