@@ -60,6 +60,9 @@ int main(int argc, char* argv[]) {
     AssertEq(45.0 * DegToRad, Facos(Fcos(FxPi4)));
     AssertEq(45.0 * DegToRad, Fatan(Ftan(FxPi4)));
 
+    AssertEq(0.0, Fdiv(Fx1, Fx0));
+    AssertEq(0.0, Fmod(Fx1, Fx0));
+
     printf("\nAll good!!!\n");
     fflush(stdout);
 
